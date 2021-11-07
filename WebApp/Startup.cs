@@ -31,6 +31,7 @@ namespace WebApp
             services.AddControllersWithViews();
             services.AddDbContext<WebAppDbContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("WebAppConnectionString"), builder => builder.MigrationsAssembly("WebApp")));
             services.AddScoped<SeedService>();
+            services.AddScoped<UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

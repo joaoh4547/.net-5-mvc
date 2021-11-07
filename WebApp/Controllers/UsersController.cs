@@ -4,16 +4,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApp.Models;
+using WebApp.Services;
 
 namespace WebApp.Controllers
 {
     public class UsersController : Controller
     {
-        public IActionResult Index()
+
+        private readonly UserService _userService;
+
+        public UsersController(UserService userService)
         {
-            var users = new List<User> {
-                new User{ Id=1,FirstName="João Ferreira",LastName="da Silva",Email="joao.ferreira@gmail.com",BirthDate=new DateTime(1997,12,05)}
-            };
+            _userService = userService;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var users = await _userService.FindAllAsync();
             return View(users);
         }
     }
