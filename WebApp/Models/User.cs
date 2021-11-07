@@ -18,5 +18,18 @@ namespace WebApp.Models
         public DateTime BirthDate { get; set; }
 
 
+        public User()
+        {
+
+        }
+
+        public User(int id, string firstName, string lastName, string email, DateTime birthDate)
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            BirthDate = birthDate;
+        }
     }
 }

@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using WebApp.Data;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using WebApp.Services;
 
 namespace WebApp
 {
@@ -29,10 +30,11 @@ namespace WebApp
         {
             services.AddControllersWithViews();
             services.AddDbContext<WebAppDbContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("WebAppConnectionString"), builder => builder.MigrationsAssembly("WebApp")));
+            services.AddScoped<SeedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,SeedService seedService)
         {
             var ptBr = CultureInfo.GetCultureInfo("pt-br");
             var localizationOptions = new RequestLocalizationOptions
@@ -45,6 +47,7 @@ namespace WebApp
             app.UseRequestLocalization(localizationOptions);
             if (env.IsDevelopment())
             {
+                seedService.Seed();
                 app.UseDeveloperExceptionPage();
             }
             else
