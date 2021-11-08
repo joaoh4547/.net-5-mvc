@@ -19,15 +19,23 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            @*<a asp-controller="Users" asp-action="Index" class="nav-link active">Usuarios</a>*@
-                            <a asp-controller="Users" asp-action="Index" class="nav-link ">Usuários</a>
+
+                            @if (Html.ViewContext.RouteData.Values["controller"].ToString() == "Users")
+                            {
+                                <a asp-controller="Users" asp-action="Index" class='nav-link  text-info'>Usuários</a>
+                            }
+                            else
+                            {
+                                <a asp-controller="Users" asp-action="Index" class='nav-link'>Usuários</a>
+                            }
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container-fluid" >
+    <div class="container-fluid">
+        <p></p>
         <main role="main" class="p-4">
             @RenderBody()
         </main>
