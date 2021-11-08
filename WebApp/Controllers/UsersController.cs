@@ -27,10 +27,14 @@ namespace WebApp.Controllers
 
         public IActionResult Create()
         {
-            var viewModel = new UserViewModel();
-            return View(viewModel);
+            return View();
         }
-        
-        
+
+        [HttpPost]
+        public async Task<IActionResult> Create(User user)
+        {
+            await _userService.CreateAsync(user);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

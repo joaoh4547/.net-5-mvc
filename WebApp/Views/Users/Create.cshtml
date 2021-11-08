@@ -1,28 +1,30 @@
-﻿@model UserViewModel
+﻿@model User
 @{
     ViewData["Title"] = "View";
 }
 
 <form asp-action="Create">
+    <div asp-validation-summary="All" class="text-danger"></div>
     <div class="row">
         <div class="col-4">
-            <label asp-for="User.FirstName"></label>
-            <input asp-for="User.FirstName" class="form-control">
+            <label asp-for="FirstName"></label>
+            <input asp-for="FirstName" class="form-control">
+            <span asp-validation-for="FirstName" class="text-danger"></span>
         </div>
         <div class="col-4">
-            <label asp-for="User.LastName"></label>
-            <input asp-for="User.LastName" class="form-control">
+            <label asp-for="LastName"></label>
+            <input asp-for="LastName" class="form-control">
         </div>
         <div class="col-4">
-            <label asp-for="User.Email"></label>
-            <input asp-for="User.Email" class="form-control">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control">
         </div>
 
     </div>
     <div class="row mt-5">
         <div class="col-6">
-            <label asp-for="User.BirthDate"></label>
-            <input asp-for="User.BirthDate" class="form-control">
+            <label asp-for="BirthDate"></label>
+            <input asp-for="BirthDate" class="form-control">
         </div>
     </div>
     <div class="row mt-4">
@@ -31,3 +33,7 @@
         </div>
     </div>
 </form>
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

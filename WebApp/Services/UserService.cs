@@ -21,5 +21,11 @@ namespace WebApp.Services
         {
             return await _context.Users.ToListAsync();
         }
+
+        public async Task CreateAsync(User user)
+        {
+             _context.Add(user);
+            await _context.SaveChangesAsync();
+        }
     }
 }
